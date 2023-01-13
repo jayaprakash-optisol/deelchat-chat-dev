@@ -1,0 +1,15 @@
+version: '2'
+ 
+services:
+  servicedev:
+    image: "deelchat-chat:prod"
+    volumes:
+      - /DATA/projects/Docker/Deelchat-chat-Files:/home/ubuntu/DeelChatFiles
+    # Expose ports [HOST:CONTAINER}
+    ports:
+      - "9001:9001"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "40k"
+        max-file: "20"

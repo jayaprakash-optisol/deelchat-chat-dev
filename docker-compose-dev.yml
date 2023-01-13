@@ -1,0 +1,15 @@
+version: '2'
+ 
+services:
+  servicedev:
+    container_name: "deelchat-chat-dev"
+    image: "deelchat-chat:dev"
+ 
+    # Expose ports [HOST:CONTAINER}
+    ports:
+      - "9003:9003"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "40k"
+        max-file: "20"

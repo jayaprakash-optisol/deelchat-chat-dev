@@ -1,0 +1,18 @@
+{
+  "development": {
+    "username": "root",
+    "password": "db@dm1n",
+    "database": "deelchat",
+    "host": "34.218.121.25",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "db@dm1n",
+    "database": "deelchattest",
+    "host": "34.218.121.25",
+    "dialect": "mysql"
+  }
+}
+
+ 
