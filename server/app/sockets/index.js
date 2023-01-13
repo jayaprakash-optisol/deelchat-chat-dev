@@ -33,6 +33,7 @@ const bodyParser = require('body-parser');
 const config = require('../../../config/configuration');
 const moment = require('moment');
 const mkdirp = require('mkdirp');
+const { getBlockedStatus } = require('../controller/usercontroller');
 
 app.use(cors());
 app.use(
@@ -672,7 +673,6 @@ const socketEvents = (io, app) => {
     socket.on('send-message', function (data, callback) {
       let onlineMember = getOnlineUsers();
       createMessage(data, onlineMember, callback);
-      // socket.emit('new-message', data); // Test new-message
     });
 
     // socket.on('disconnect', (data,reason) => {
@@ -2291,7 +2291,6 @@ const socketEvents = (io, app) => {
         onlineMember,
         data,
         function (err, msgResponse) {
-          console.log('<----------msgResponse------------->', msgResponse);
           readStatus(data, onlineMember, msgResponse, callback);
         }
       );
@@ -2327,7 +2326,18 @@ const socketEvents = (io, app) => {
           //  }
           // })
           socket.broadcast.emit('highlight-room', msgResponse);
-          socket.to(data.roomname).emit('new-message', msgResponse);
+
+          //? Restrict Blocked Reciever
+          getBlockedStatus(data.roomname)
+            .then((res) => {
+              if (res) {
+                console.log('BlockStatus', res);
+                socket.to(data.roomname).emit('new-message', msgResponse);
+              }
+            })
+            .catch((err) => {
+              console.log('Error from readStatus', err);
+            });
 
           // for IOS getting NO-ACK in callback
           socket.emit('callback', msgResponse);
