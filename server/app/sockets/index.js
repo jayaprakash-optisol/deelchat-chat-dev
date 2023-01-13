@@ -2330,8 +2330,9 @@ const socketEvents = (io, app) => {
           //? Restrict Blocked Reciever
           getBlockedStatus(data.roomname)
             .then((res) => {
-              if (res) {
-                console.log('BlockStatus', res);
+              console.log('BlockStatus', res);
+
+              if (!res) {
                 socket.to(data.roomname).emit('new-message', msgResponse);
               }
             })
