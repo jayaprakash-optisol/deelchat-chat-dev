@@ -2447,9 +2447,6 @@ const socketEvents = (io, app) => {
       msgResponse,
       function (error, deelMessage) {
         if (!error) {
-          console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$');
-
-          console.log(data.roomname);
           if (deelMessage.userbasedKeywords.length > 0) {
             let user = [];
             _.forEach(deelMessage.userbasedKeywords, function (roomUser) {
