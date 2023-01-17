@@ -8,9 +8,8 @@ async function getBlockedStatus(roomName) {
       where: { loginuser: sender, blockuser: receiver },
     });
 
-    if (!response) {
-      return false;
-    }
+    if (!response) return false;
+
     return response.dataValues?.block ? true : false;
   } catch (error) {
     console.log('getBlockedStatus--error', error);
