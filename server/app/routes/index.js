@@ -9,6 +9,4 @@ router.use('/user', isAuthenticated, userRouter);
 router.use('/chatrooms', isAuthenticated, chatroomRouter);
 router.use('/chatrequest', isAuthenticated, chatrequestRouter);
 
-router.use('/usr', userRouter);
-
 module.exports = router;
